@@ -1,0 +1,9 @@
+* Fixa tangenter
+  Tangenterna hänger, så figuren reagerar på piltangent första gången,
+  men sedan måste man vänta innnan den accepterar en ny
+  tangenttryckning.
+** Lösning
+   Anropa game.input.keyboard.reset(true); varje gång en
+   tangenttryckning har behandlats.
+* Musstyrning
+* Kunna gå snett
