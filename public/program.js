@@ -372,6 +372,40 @@ window.onload = function () {
       playerOp[direction] = 1;
     }
     delete playerOp[opposites[direction]];
+    for (id in users) {
+      var user = users[id];
+      if (user.texturePrefix === "you") {
+        if (playerOp.r === 1) {
+          user.sprite.angle = 90;
+          if (playerOp.u === 1) {
+            user.sprite.angle -= 45;
+          } else if (playerOp.d === 1) {
+            user.sprite.angle += 45;
+          }
+        } else if (playerOp.u === 1) {
+          user.sprite.angle = 0;
+          if (playerOp.l === 1) {
+            user.sprite.angle -= 45;
+          } else if (playerOp.r === 1) {
+            user.sprite.angle += 45;
+          }
+        } else if (playerOp.l === 1) {
+          user.sprite.angle = 270;
+          if (playerOp.u === 1) {
+            user.sprite.angle += 45;
+          } else if (playerOp.d === 1) {
+            user.sprite.angle -= 45;
+          }
+        } else if (playerOp.d === 1) {
+          user.sprite.angle = 180;
+          if (playerOp.l === 1) {
+            user.sprite.angle += 45;
+          } else if (playerOp.r === 1) {
+            user.sprite.angle -= 45;
+          }
+        }
+      }
+    }
   }
 
   function render() {
