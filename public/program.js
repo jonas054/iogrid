@@ -26,10 +26,10 @@ window.onload = function () {
   var SERVER_WORKER_ID;
 
   var youTextures = {
-    up: 'img/you-back.gif',
-    left: 'img/you-side-left.gif',
-    right: 'img/you-side-right.gif',
-    down: 'img/you-front.gif'
+    up: 'img/io-gubbe2.png',
+    left: 'img/io-gubbe2.png',
+    right: 'img/io-gubbe2.png',
+    down: 'img/io-gubbe2.png'
   };
 
   var othersTextures = {
@@ -224,8 +224,8 @@ window.onload = function () {
     user.score = userData.score;
     user.sprite = sprite;
 
-    user.sprite.width = Math.round(userData.diam * 0.73);
-    user.sprite.height = userData.diam;
+    user.sprite.width = Math.round(userData.diam * 2);
+    user.sprite.height = user.sprite.width * 0.8;
     user.diam = user.sprite.width;
 
     moveUser(userData.id, userData.x, userData.y);
