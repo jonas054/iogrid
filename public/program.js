@@ -327,31 +327,51 @@ window.onload = function () {
   }
 
   var lastActionTime = 0;
-
+  var playerOp = {};
   function update() {
-    var didAction = false;
-    var playerOp = {};
     if (keys.up.isDown) {
-      playerOp.u = 1;
-      didAction = true;
+      changeDirection('u');
     }
     if (keys.down.isDown) {
-      playerOp.d = 1;
-      didAction = true;
+      changeDirection('d');
     }
     if (keys.right.isDown) {
-      playerOp.r = 1;
-      didAction = true;
+      changeDirection('r');
     }
     if (keys.left.isDown) {
-      playerOp.l = 1;
-      didAction = true;
+      changeDirection('l');
     }
-    if (didAction && Date.now() - lastActionTime >= USER_INPUT_INTERVAL) {
+    var isEmpty = (Object.keys(playerOp).length === 0 &&
+                   playerOp.constructor === Object);
+    if (!isEmpty && Date.now() - lastActionTime >= USER_INPUT_INTERVAL) {
       lastActionTime = Date.now();
       // Send the player operations for the server to process.
       socket.emit('action', playerOp);
     }
+    game.input.keyboard.reset(true);
+  }
+
+  const opposites = {
+    u: 'd',
+    d: 'u',
+    l: 'r',
+    r: 'l'
+  };
+
+  function changeDirection(direction) {
+    if (playerOp[direction] === 1) {
+      // Player is already moving in the wanted direction. Make it
+      // move ONLY in that direction, i.e. not diagonally.
+      for (var d in opposites) {
+        if (d !== direction) {
+          delete playerOp[d];
+        }
+      }
+    }
+    if (!playerOp[opposites[direction]]) {
+      playerOp[direction] = 1;
+    }
+    delete playerOp[opposites[direction]];
   }
 
   function render() {
