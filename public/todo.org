@@ -1,9 +1,17 @@
-* Fixa tangenter
+* DONE Fixa tangenter
   Tangenterna hänger, så figuren reagerar på piltangent första gången,
   men sedan måste man vänta innnan den accepterar en ny
   tangenttryckning.
 ** Lösning
    Anropa game.input.keyboard.reset(true); varje gång en
    tangenttryckning har behandlats.
+** Kvarstående problem
+   Nu stannar figuren när man släpper upp tangenten. Det är bra. Men
+   det blir en paus efter första tangenttryckningen.
+   
+   Fråga: Kommer man in i update() under tiden som den här pausen
+   pågår? Svar: Nej.
+
+   Det betyder att vi behöver en annan mekanism.
 * Musstyrning
-* Kunna gå snett
+* DONE Kunna gå snett
